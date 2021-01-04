@@ -18,9 +18,16 @@ RSpec.describe 'movie show page' do
 
   it 'lists all actors youngest to oldest' do
     visit "/movies/#{@movie3.id}"
+    
+    expect(page.all('#name')[0]).to have_content("Idina Menzel")
+    expect(page.all('#name')[1]).to have_content("Kristen Bell")
 
-    expect(page.all('#name')[0].to have_content(@actor3.name)
-    expect(page.all('#name')[1].to have_content(@actor4.name)
+  end
+
+  it 'displays the average actor age' do
+    visit "/movies/#{@movie3.id}"
+
+    expect(page).to have_content(34)
   end
 
 
