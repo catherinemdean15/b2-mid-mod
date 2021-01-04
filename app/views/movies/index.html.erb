@@ -1,0 +1,19 @@
+<h1>Movies!</h1>
+
+<% @movies.each do |movie| %>
+  <%= link_to "#{movie.title}", "/movies/#{movie.id}"%><br>
+<% end %>
+
+
+<%= form_tag "/movies" do %>
+    <%= label_tag :title %>
+    <%= text_field_tag :title, params[:title] %></br></br>
+    <%= label_tag :creation_year %>
+    <%= text_field_tag :creation_year, params[:creation_year]%></br></br>
+    <%= label_tag :genre %>
+    <%= text_field_tag :genre, params[:genre]  %></br></br>
+    <%= label_tag :studio %>
+    <%= text_field_tag :studio, params[:studio]  %></br></br>
+
+    <%= submit_tag 'Create new movie'%>
+  <% end %>
