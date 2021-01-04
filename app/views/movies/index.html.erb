@@ -1,5 +1,11 @@
 <h1>Movies!</h1>
 
+<%= form_tag("/movies", method: :patch) do %>
+    <%= label_tag :actor %>
+    <%= text_field_tag :actor %>
+    <%= submit_tag 'Search for movies with this actor'%>
+<% end %>
+
 <% @movies.each do |movie| %>
   <%= link_to "#{movie.title}", "/movies/#{movie.id}"%><br>
 <% end %>

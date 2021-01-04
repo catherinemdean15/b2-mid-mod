@@ -39,4 +39,15 @@ RSpec.describe 'movies index page' do
 
   end
 
+  it 'can display movies that have a specific actor' do
+    visit '/movies'
+
+    fill_in "Actor", with: "Bell"
+    click_button 'Search for movies with this actor'
+
+    expect(page).to have_content(@movie3.title)
+    expect(page).to have_no_content(@movie1.title)
+
+  end
+
 end

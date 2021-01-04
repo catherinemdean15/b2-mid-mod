@@ -15,10 +15,16 @@ class MoviesController < ApplicationController
   end
 
   def update
-    actor = Actor.where("#{"name"} like ?", "%#{params[:actor]}%")
-    movie = Movie.find(params[:id])
-    MovieActor.create!(actor_id: actor[0].id, movie_id: movie.id)
-    redirect_to "/movies/#{movie.id}"
+      actor = Actor.partial_match(params[:actor], "name")
+      movie = Movie.find(params[:id])
+      MovieActor.create!(actor_id: actor[0].id, movie_id: movie.id)
+      redirect_to "/movies/#{movie.id}"
+  end
+
+  def search
+    actor = Actor.partial_match(params[:actor], "name")
+    @movies = actor[0].movies
+    render :show
   end
 
   private
