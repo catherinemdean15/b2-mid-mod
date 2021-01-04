@@ -16,5 +16,14 @@ RSpec.describe Movie, type: :model do
 
       expect(@movie3.average_actor_age).to eq(34)
     end
+
+    it 'actors_youngest_to_oldest' do
+      @studio2 = Studio.create!(name: "Disney", location: "California")
+      @movie3 = @studio2.movies.create!(title: "Frozen", creation_year: 2012, genre: "Family")
+      @actor3 = @movie3.actors.create!(name: "Kristen Bell", age: 35)
+      @actor4 = @movie3.actors.create!(name: "Idina Menzel", age: 33)
+
+      expect(@movie3.actors_youngest_to_oldest).to eq([@actor4, @actor3])
+    end
   end
 end
