@@ -1,2 +1,6 @@
 <h1><%= @actor.name %></h1>
 <h3><%= @actor.age %></h3>
+
+Actors Worked With: <% @actor.actors_worked_with.each do |colleage| %>
+  <%= colleage.name %>,
+<% end %>
