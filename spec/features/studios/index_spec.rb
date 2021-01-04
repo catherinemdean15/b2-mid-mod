@@ -19,9 +19,9 @@ RSpec.describe 'studio index page' do
   it 'lists all of the movies in the studio' do
     visit "/studios"
 
-    expect(page).to have_content(@movie1.title)
-    expect(page).to have_content(@movie2.title)
-    expect(page).to have_content(@movie3.title)
+    expect(page.all('#movie')[0]).to have_content(@movie1.title)
+    expect(page.all('#movie')[0]).to have_content(@movie2.title)
+    expect(page.all('#movie')[1]).to have_content(@movie3.title)
   end
 
 end
