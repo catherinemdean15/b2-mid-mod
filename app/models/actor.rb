@@ -9,4 +9,8 @@ class Actor <ApplicationRecord
     end.flatten.uniq
   end
 
+  def self.partial_match(keyword, column)
+    where("#{column} like ?", "%#{keyword}%")
+  end
+
 end
