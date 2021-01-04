@@ -18,5 +18,15 @@ RSpec.describe 'actor show page' do
     expect(page).to have_content(@actor3.age)
   end
 
+  it 'creates a unique list of actors worked with' do
+    @movie1 = @studio2.movies.create!(title: "Frozen 2", creation_year: 2019, genre: "Family")
+    MovieActor.create!(actor_id: @actor3.id, movie_id: @movie1.id)
+    MovieActor.create!(actor_id: @actor4.id, movie_id: @movie1.id)
+
+    visit "/actors/#{@actor3.id}"
+
+    expect(page).to have_content("Josh Gad, Jonathan Groff, Kristen Bell, Idina Menzel,")
+  end
+
 
 end
