@@ -6,6 +6,7 @@ RSpec.describe 'movie show page' do
     @movie3 = @studio2.movies.create!(title: "Frozen", creation_year: 2012, genre: "Family")
     @actor3 = @movie3.actors.create!(name: "Kristen Bell", age: 35)
     @actor4 = @movie3.actors.create!(name: "Idina Menzel", age: 33)
+    @actor5 = Actor.create!(name: "Josh Gad", age: 34)
   end
 
   it 'lists movie title, creation year, and genre' do
@@ -18,7 +19,7 @@ RSpec.describe 'movie show page' do
 
   it 'lists all actors youngest to oldest' do
     visit "/movies/#{@movie3.id}"
-    
+
     expect(page.all('#name')[0]).to have_content("Idina Menzel")
     expect(page.all('#name')[1]).to have_content("Kristen Bell")
 
@@ -28,6 +29,14 @@ RSpec.describe 'movie show page' do
     visit "/movies/#{@movie3.id}"
 
     expect(page).to have_content(34)
+  end
+
+  it 'has a form to search for an actor' do
+    visit "/movies/#{@movie3.id}"
+
+    fill_in 'Actor', with: 'Josh Gad'
+    click_button 'Search for actor'
+    expect(page).to have_content(@actor5.name)
   end
 
 
